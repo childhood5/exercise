@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
+import com.company.exercise1.FirstExercise;
+
 /**
  * Unit test for First exercise
  */
