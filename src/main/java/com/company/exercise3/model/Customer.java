@@ -1,4 +1,4 @@
-package com.company.exercise3;
+package com.company.exercise3.model;
 
 public class Customer {
     

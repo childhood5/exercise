@@ -2,33 +2,23 @@ package com.company.exercise3;
 
 import java.math.BigDecimal;
 
+import com.company.exercise3.model.Bill;
+import com.company.exercise3.model.User;
+import com.company.exercise3.rules.AbstractDiscount;
+import com.company.exercise3.rules.AmountDiscount;
+import com.company.exercise3.rules.PercentageDiscount;
+
 public class ThirdExercise {
 
-    private static final String GROCERIES = "groceries";
-    private static final String EMPLOYEE = "employee";
-    private static final String AFFILIATE = "affiliate";
-    private static final String CUSTOMER = "customer";
-
-    public BigDecimal getPaymentAmount(Bill bill) {
-        
-        String groceries =  bill.getGroceries().getCatalogues();
-        User user =  bill.getUser();
-        BigDecimal totalAmount = bill.getTotalAmount();
-        if(null != user) {
-            Customer customer =  user.getCustomer();
-            if (!GROCERIES.equals(groceries)) {
-                if (EMPLOYEE.equals(user.getEmployee())) {
-                    totalAmount = totalAmount.multiply(BigDecimal.valueOf(70)).divide(BigDecimal.valueOf(100));
-                } else if (AFFILIATE.equals(user.getAffiliate())) {
-                    totalAmount = totalAmount.multiply(BigDecimal.valueOf(90)).divide(BigDecimal.valueOf(100));
-                } else if (customer != null && CUSTOMER.equals(customer.getName()) && customer.getYear() > 2) {
-                    totalAmount = totalAmount.multiply(BigDecimal.valueOf(95)).divide(BigDecimal.valueOf(100));
-                }
-            }
-            int amountDiscount = totalAmount.divide(BigDecimal.valueOf(100)).intValue() * 5;
-            return totalAmount.subtract(BigDecimal.valueOf(amountDiscount));
-        }
-        return BigDecimal.ZERO;
-    }
-
+	public BigDecimal getPaymentAmount(Bill bill) {
+		User user = bill.getUser();
+		BigDecimal totalAmount = bill.getTotalAmount();
+		if (null != user) {
+			AbstractDiscount percentageDiscount = new PercentageDiscount();
+			AbstractDiscount amountDiscount = new AmountDiscount();
+			totalAmount = percentageDiscount.getDiscount(user, totalAmount);
+			return amountDiscount.getDiscount(user, totalAmount);
+		}
+		return BigDecimal.ZERO;
+	}
 }

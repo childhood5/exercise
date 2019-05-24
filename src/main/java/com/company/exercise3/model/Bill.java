@@ -1,12 +1,10 @@
-package com.company.exercise3;
+package com.company.exercise3.model;
 
 import java.math.BigDecimal;
 
 public class Bill {
     
     private User user;
-    
-    private Groceries groceries;
     
     private BigDecimal totalAmount;
 
@@ -16,14 +14,6 @@ public class Bill {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Groceries getGroceries() {
-        return groceries;
-    }
-
-    public void setGroceries(Groceries groceries) {
-        this.groceries = groceries;
     }
 
     public BigDecimal getTotalAmount() {

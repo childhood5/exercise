@@ -1,4 +1,4 @@
-package com.company.exercise3;
+package com.company.exercise3.model;
 
 public class User {
     
@@ -7,6 +7,8 @@ public class User {
     private String affiliate;
     
     private Customer customer;
+    
+    private boolean isGroceries;
 
     public String getEmployee() {
         return employee;
@@ -31,4 +33,12 @@ public class User {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+	public boolean isGroceries() {
+		return isGroceries;
+	}
+
+	public void setGroceries(boolean isGroceries) {
+		this.isGroceries = isGroceries;
+	}
 }
